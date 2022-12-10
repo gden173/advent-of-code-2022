@@ -29,4 +29,7 @@ func main() {
 	// Day 4 part one
 	day4.RunDayFourPartOne("day4/day4a.txt")
 
+	// Day 4 part two 
+	day4.RunDayFourPartTwo("day4/day4a.txt")
+
 }
