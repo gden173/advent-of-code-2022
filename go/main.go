@@ -4,6 +4,7 @@ import (
 	"advent-of-go/day1"
 	"advent-of-go/day2"
 	"advent-of-go/day3"
+	"advent-of-go/day4"
 )
 
 func main() {
@@ -24,4 +25,8 @@ func main() {
 
 	// Day 3 part two
 	day3.RunDayThreePartTwo("day3/day3a.txt")
+
+	// Day 4 part one 
+	day4.RunDayFourPartOne("day4/day4a.txt")
+
 }
