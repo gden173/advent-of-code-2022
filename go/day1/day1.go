@@ -66,7 +66,7 @@ func DayOnePartTwo(strs []string) int {
 
 	for _, s := range strs {
 		if s == "" {
-			amounts = append(amounts, currentVal)	
+			amounts = append(amounts, currentVal)
 			currentVal = 0
 			continue
 		}
@@ -82,28 +82,27 @@ func DayOnePartTwo(strs []string) int {
 	top3 := [3]int{0, 0, 0}
 
 	for _, is := range amounts {
-			if is > top3[0] {
-				if is > top3[1] {
-					if is > top3[2] {
+		if is > top3[0] {
+			if is > top3[1] {
+				if is > top3[2] {
 
-						top3[0] = top3[1]
-						top3[1] = top3[2]
-						top3[2] = is
-						continue
-					}
 					top3[0] = top3[1]
-					top3[1] = is
+					top3[1] = top3[2]
+					top3[2] = is
 					continue
-
 				}
-				top3[0] = is
+				top3[0] = top3[1]
+				top3[1] = is
 				continue
+
 			}
+			top3[0] = is
+			continue
+		}
 	}
 
 	return top3[0] + top3[1] + top3[2]
 }
-
 
 func RunDayOnePartTwo(fileName string) {
 	s := ReadFileToArray(fileName)

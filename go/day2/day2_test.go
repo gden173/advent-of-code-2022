@@ -1,10 +1,8 @@
 package day2
 
-
 import (
 	"testing"
 )
-
 
 func TestPaperScissorsRock(t *testing.T) {
 	// Test cases
@@ -16,7 +14,7 @@ func TestPaperScissorsRock(t *testing.T) {
 			[]string{"A Y", "B X", "C Z"},
 			15,
 		},
-		}
+	}
 
 	for _, test_case := range test_cases {
 		actual := PaperScissorsRock(test_case.strategyGuide)
@@ -25,7 +23,6 @@ func TestPaperScissorsRock(t *testing.T) {
 		}
 	}
 }
-
 
 func TestPaperScissorsRockWinLoseDraw(t *testing.T) {
 	// Test cases
@@ -37,7 +34,7 @@ func TestPaperScissorsRockWinLoseDraw(t *testing.T) {
 			[]string{"A Y", "B X", "C Z"},
 			12,
 		},
-		}
+	}
 
 	for _, test_case := range test_cases {
 		actual := PaperScissorsRockWinLoseDraw(test_case.strategyGuide)

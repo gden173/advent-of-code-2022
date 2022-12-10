@@ -8,30 +8,31 @@ import (
 )
 
 func stringToRange(s string) map[int]bool {
-	// Parse the into into two 
+	// Parse the into into two
 	ret := make(map[int]bool)
 
 	if !strings.Contains(s, "-") {
-		val,err := strconv.Atoi(strings.Trim(s, " "))
+		val, err := strconv.Atoi(strings.Trim(s, " "))
 		if err != nil {
 			panic("Cannot convert to integer")
 		}
 		ret[val] = true
-		return ret 
+		return ret
 	}
 
 	st := strings.Split(s, "-")
-	
+
 	if len(st) != 2 {
 		fmt.Println(st)
 		panic("Too many items in string: should only be 2")
 	}
 
-	s1, _  := strconv.Atoi(strings.Trim(st[0], " "))
+	s1, _ := strconv.Atoi(strings.Trim(st[0], " "))
+
 	s2, _ := strconv.Atoi(strings.Trim(st[1], " "))
 
-	for i := s1; i < s2 + 1; i ++ {
-		ret[i]  = true
+	for i := s1; i < s2+1; i++ {
+		ret[i] = true
 	}
 
 	return ret
@@ -40,10 +41,12 @@ func stringToRange(s string) map[int]bool {
 // Solves advent of code day 4 part a
 func GetSectionAssignmentOverlap(strs []string) int {
 	numOverlaps := 0
-	for i := 0; i < len(strs); i+=2 {
+	for i := 0; i < len(strs); i++ {
 
-		elf_one := stringToRange(strs[i]) 
-		elf_two := stringToRange(strs[i+1]) 
+		s := strings.Split(strs[i], ",")
+
+		elf_one := stringToRange(s[0])
+		elf_two := stringToRange(s[1])
 
 		overlap := 0
 		for k := range elf_one {
@@ -51,17 +54,47 @@ func GetSectionAssignmentOverlap(strs []string) int {
 				overlap++
 			}
 		}
-		// If the number of overlaps is equaal to the number of keys then its an overlap 
-		if overlap >=  len(elf_one) || overlap >= len(elf_two) {
-			numOverlaps ++ 
+
+		// If the number of overlaps is equaal to the number of keys then its an overlap
+		if overlap >= len(elf_one) || overlap >= len(elf_two) {
+			numOverlaps++
 		}
 
 	}
 	return numOverlaps
 }
 
-
 func RunDayFourPartOne(filename string) {
 	strs := day1.ReadFileToArray(filename)
 	fmt.Println("Day 4 part a: ", GetSectionAssignmentOverlap(strs))
+}
+
+// Day 4 part B
+func GetTotalAssignmentOverlap(strs []string) int {
+	numOverlaps := 0
+	for i := 0; i < len(strs); i++ {
+
+		s := strings.Split(strs[i], ",")
+
+		elf_one := stringToRange(s[0])
+		elf_two := stringToRange(s[1])
+
+		overlap := 0
+		for k := range elf_one {
+			if elf_two[k] {
+				overlap++
+			}
+		}
+
+		if overlap > 0 {
+			numOverlaps++
+		}
+
+	}
+	return numOverlaps
+}
+
+func RunDayFourPartTwo(filename string) {
+	strs := day1.ReadFileToArray(filename)
+	fmt.Println("Day 4 part B: ", GetTotalAssignmentOverlap(strs))
 }
