@@ -3,7 +3,8 @@ package main
 import (
 	"advent-of-go/day1"
 	"advent-of-go/day2"
-	)
+	"advent-of-go/day3"
+)
 
 func main() {
 	// Day 1 part one
@@ -17,4 +18,10 @@ func main() {
 
 	// Day 2 part two 
 	day2.RunDayTwoPartTwo("day2/day2a.txt")
+
+	// Day 3 part one 
+	day3.RunDayThreePartOne("day3/day3a.txt")
+
+	// Day 3 part two
+	day3.RunDayThreePartTwo("day3/day3a.txt")
 }
