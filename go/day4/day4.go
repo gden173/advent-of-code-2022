@@ -4,37 +4,47 @@ import (
 	"advent-of-go/day1"
 	"fmt"
 	"strconv"
+	"strings"
 )
+
+func stringToRange(s string) map[int]bool {
+	// Parse the into into two 
+	ret := make(map[int]bool)
+
+	if !strings.Contains(s, "-") {
+		val,err := strconv.Atoi(strings.Trim(s, " "))
+		if err != nil {
+			panic("Cannot convert to integer")
+		}
+		ret[val] = true
+		return ret 
+	}
+
+	st := strings.Split(s, "-")
+	
+	if len(st) != 2 {
+		fmt.Println(st)
+		panic("Too many items in string: should only be 2")
+	}
+
+	s1, _  := strconv.Atoi(strings.Trim(st[0], " "))
+	s2, _ := strconv.Atoi(strings.Trim(st[1], " "))
+
+	for i := s1; i < s2 + 1; i ++ {
+		ret[i]  = true
+	}
+
+	return ret
+}
 
 // Solves advent of code day 4 part a
 func GetSectionAssignmentOverlap(strs []string) int {
 	numOverlaps := 0
 	for i := 0; i < len(strs); i+=2 {
-		// Parse out the .. frome each elfs assignments and convert them to maps of integers  
-		elf_one := make(map[int]bool)
-		elf_two := make(map[int]bool)
 
-		for _, c := range strs[i] {
-			ic, err := strconv.Atoi(string(c))
-			if err != nil { 
-				continue
+		elf_one := stringToRange(strs[i]) 
+		elf_two := stringToRange(strs[i+1]) 
 
-			} else {
-				elf_one[ic] = true
-			}
-		}
-
-		for _, c := range strs[i+1] {
-			ic, err := strconv.Atoi(string(c))
-			if err != nil { 
-				continue
-
-			} else {
-				elf_two[ic] = true
-			}
-		}
-
-		// Compare the two maps and count the number of overlaps
 		overlap := 0
 		for k := range elf_one {
 			if elf_two[k] {
